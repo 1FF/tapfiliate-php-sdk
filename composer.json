@@ -1,0 +1,27 @@
+{
+    "name": "tapfiliate/sdk-php",
+    "description": "Client for tapfiliate.com",
+    "keywords": ["tapfiliate", "php", "sdk"],
+    "license": "MIT",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Tapfiliate\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alexey Timchenko",
+            "email": "a.timchenko@admitad.com"
+        }
+    ],
+    "require": {
+        "ext-curl": "*",
+        "psr/log": "^3.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.8",
+        "friendsofphp/php-cs-fixer": "^3.13",
+        "phpunit/phpunit": "^9.5"
+    }
+}
