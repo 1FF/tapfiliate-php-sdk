@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Tapfiliate\Api;
 
-use RuntimeException;
-use JsonSerializable;
 use Psr\Log\LoggerInterface;
 use Tapfiliate\Api\Exceptions\AccessDeniedException;
 use Tapfiliate\Api\Exceptions\BadRequestException;
@@ -16,12 +14,10 @@ use Tapfiliate\Api\Exceptions\ServiceUnavailableException;
 
 class ApiClient
 {
-    private const ALLOWED_METHODS = ['GET', 'POST', 'PATCH', 'DELETE'];
+    private const ALLOWED_METHODS = ['GET', 'POST', 'PATCH', 'DELETE', 'PUT'];
 
     private LoggerInterface $logger;
-
     private string $apiKey;
-
     private string $host;
 
     public function __construct(
@@ -35,29 +31,27 @@ class ApiClient
     }
 
     /**
-     * @throws (RuntimeException)
+     * @throws (\RuntimeException)
      */
     public function sendRequest(
         string $method,
         string $path,
         array $urlOptions = [],
-        JsonSerializable $model = null
+        ?\JsonSerializable $model = null
     ): ?array {
         if (!in_array($method, self::ALLOWED_METHODS)) {
-            throw new RuntimeException('Method is not allowed');
+            throw new \RuntimeException('Method is not allowed');
         }
         $url = $this->buildUrl($path, $urlOptions);
         $curlBuilder = new CurlBuilder();
         $curlBuilder
             ->setMethod($method)
             ->setUrl($url)
-            ->setHeaders(['Api-Key: ' . $this->apiKey])
-        ;
+            ->setHeaders(['Api-Key: ' . $this->apiKey]);
 
-        if ('GET' !== $method && null !== $model) {
+        if ($method !== 'GET' && $model !== null) {
             $curlBuilder
-                ->setBody(json_encode($model->jsonSerialize()))
-            ;
+                ->setBody(json_encode($model->jsonSerialize()));
         }
 
         return $this->sendRequestToApi($curlBuilder->toArray());
@@ -81,10 +75,10 @@ class ApiClient
     {
         $ch = curl_init();
         curl_setopt_array($ch, $curlOptions);
-        $result = (string) curl_exec($ch);
+        $result = (string)curl_exec($ch);
 
         if (curl_error($ch)) {
-            $errorCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $errorCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $message = curl_error($ch);
             $url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
             $dataset = json_encode($curlOptions);

@@ -5,7 +5,7 @@ namespace Tapfiliate\Models;
 class Commission implements \JsonSerializable
 {
     private ?int $id = null;
-    private ?string $conversionSubAmount = null;
+    private ?float $conversionSubAmount = null;
     private ?float $amount = null;
     private ?string $currency = null;
     private ?string $commissionType = null;
@@ -27,12 +27,12 @@ class Commission implements \JsonSerializable
         $this->id = $id;
     }
 
-    public function getConversionSubAmount(): ?string
+    public function getConversionSubAmount(): ?float
     {
         return $this->conversionSubAmount;
     }
 
-    public function setConversionSubAmount(?string $conversionSubAmount): void
+    public function setConversionSubAmount(?float $conversionSubAmount): void
     {
         $this->conversionSubAmount = $conversionSubAmount;
     }

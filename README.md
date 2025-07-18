@@ -9,7 +9,7 @@ Install
 Install http://getcomposer.org/ and run the following command:
 
 ```
-php composer.phar require tapfiliate/sdk-php
+php composer.phar require 1ff/tapfiliate-php-sdk
 ```
 
 PHP SDK Configuration
