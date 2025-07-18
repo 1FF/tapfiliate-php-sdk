@@ -1,5 +1,5 @@
 {
-    "name": "tapfiliate/sdk-php",
+    "name": "1ff/tapfiliate-php-sdk",
     "description": "Client for tapfiliate.com",
     "keywords": ["tapfiliate", "php", "sdk"],
     "license": "MIT",
@@ -11,8 +11,8 @@
     },
     "authors": [
         {
-            "name": "Alexey Timchenko",
-            "email": "a.timchenko@admitad.com"
+            "name": "Borislav Koprinski",
+            "email": "b.koprinski@gmail.com"
         }
     ],
     "require": {
