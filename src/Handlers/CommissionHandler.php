@@ -21,14 +21,16 @@ class CommissionHandler
         $this->modelHelper = $modelHelper;
     }
 
-    public function listCommissions(Commission $commission, bool $overrideMaxCookieTime = false): array
+    public function listCommissions(Commission $commission, ?string $status = null): array
     {
         $result = [];
 
         $response = $this->apiClient->sendRequest(
             'GET',
             '/commissions/',
-            ['override_max_cookie_time' => $overrideMaxCookieTime],
+            array_filter([
+                'status' => $status,
+            ]),
             $commission
         );
 
