@@ -42,7 +42,7 @@ class CommissionHandler
         );
 
         foreach ((array)$response as $commissionResponse) {
-            $result[] = $this->modelHelper->toObject($commission, (array)$commissionResponse);
+            $result[] = $this->modelHelper->toObject(new Commission(), (array)$commissionResponse);
         }
 
         return $result;
